@@ -34,11 +34,16 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     public static final float MINIMUM_CONFIDENCE_TF_OD_API = 0.5f;
+    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        mediaPlayer=MediaPlayer.create(this,R.raw.audio_0); //시작 안내 음성 voice
+        mediaPlayer.start();
+
         startSplash();
         //startActivity(new Intent(MainActivity.this, DetectorActivity.class));
         //initBox();
@@ -52,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, DetectorActivity.class));
                 finish();
             }
-        },3000);
+        },8000);
     }
     private static final Logger LOGGER = new Logger();
 
