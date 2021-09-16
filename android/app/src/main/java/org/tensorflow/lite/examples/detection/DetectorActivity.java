@@ -217,6 +217,121 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
                                 result.setLocation(location);
                                 mappedRecognitions.add(result);
+
+                                MediaPlayer mediaPlayer;
+                                String title = result.getTitle();   // 인식한 객체의 라벨을 가져옴
+
+                                if(title.equals("plastic bottle")) {
+                                    System.out.println("Plastic Bottle Detected!");
+
+                                    mediaPlayer = MediaPlayer.create(DetectorActivity.this, R.raw.audio_1); // 각 라벨에 맞는 오디오 파일로 변경
+
+                                    mediaPlayer.start();
+
+                                    // 첫 객체 인식 후 음성 안내할 동안 객체 탐지를 멈춰보려는 작은 시도...
+                                    try {
+                                        Thread.sleep(mediaPlayer.getDuration());
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    /*
+                                    Handler handler = new Handler();
+
+                                    Thread t=new Thread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            handler.post(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    MediaPlayer mediaPlayer = MediaPlayer.create(DetectorActivity.this, R.raw.audio_1);
+                                                    mediaPlayer.start();
+                                                }
+                                            });
+                                        }
+                                    });
+
+                                    t.start();
+                                    */
+                                    /*
+                                    handler.postDelayed(new Runnable() {
+                                        public void run() {
+                                            MediaPlayer mediaPlayer = MediaPlayer.create(DetectorActivity.this, R.raw.audio_1);
+                                            mediaPlayer.start();
+                                        }
+                                    }, 9000);*/
+
+                                }
+                                else if(title.equals("plastic")) {
+                                    System.out.println("Plastic Detected!");
+                                    /*
+                                    mediaPlayer = MediaPlayer.create(DetectorActivity.this, R.raw.audio_1); // 각 라벨에 맞는 오디오 파일로 변경
+
+                                    mediaPlayer.start();
+
+                                    try {
+                                        Thread.sleep(mediaPlayer.getDuration());
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }*/
+
+                                }
+                                else if(title.equals("can")) {
+                                    System.out.println("Can Detected!");
+                                    /*
+                                    mediaPlayer = MediaPlayer.create(DetectorActivity.this, R.raw.audio_1); // 각 라벨에 맞는 오디오 파일로 변경
+
+                                    mediaPlayer.start();
+
+                                    try {
+                                        Thread.sleep(mediaPlayer.getDuration());
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }*/
+
+                                }
+                                else if(title.equals("glass bottle")) {
+                                    System.out.println("Glass Bottle Detected!");
+                                    /*
+                                    mediaPlayer = MediaPlayer.create(DetectorActivity.this, R.raw.audio_1); // 각 라벨에 맞는 오디오 파일로 변경
+
+                                    mediaPlayer.start();
+
+                                    try {
+                                        Thread.sleep(mediaPlayer.getDuration());
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }*/
+
+                                }
+                                else if(title.equals("plastic bag")) {
+                                    System.out.println("Plastic Bag Detected!");
+                                    /*
+                                    mediaPlayer = MediaPlayer.create(DetectorActivity.this, R.raw.audio_1); // 각 라벨에 맞는 오디오 파일로 변경
+
+                                    mediaPlayer.start();
+
+                                    try {
+                                        Thread.sleep(mediaPlayer.getDuration());
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }*/
+
+                                }
+                                else if(title.equals("paper bag")) {
+                                    System.out.println("Paper Bag Detected!");
+                                    /*
+                                    mediaPlayer = MediaPlayer.create(DetectorActivity.this, R.raw.audio_1); // 각 라벨에 맞는 오디오 파일로 변경
+
+                                    mediaPlayer.start();
+
+                                    try {
+                                        Thread.sleep(mediaPlayer.getDuration());
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }*/
+
+                                }
                             }
                         }
 
