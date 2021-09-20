@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        mediaPlayer=MediaPlayer.create(this,R.raw.audio_0); //시작 안내 음성 voice
+        mediaPlayer=MediaPlayer.create(this,R.raw.audio_0);
         mediaPlayer.start();
 
         startSplash();
@@ -65,10 +66,11 @@ public class MainActivity extends AppCompatActivity {
 
     private static final boolean TF_OD_API_IS_QUANTIZED = false;
 
-    //private static final String TF_OD_API_MODEL_FILE = "yolov4-416-fp32.tflite";
-    private static final String TF_OD_API_MODEL_FILE = "yolov4-416-v1.tflite";
+    private static final String TF_OD_API_MODEL_FILE = "yolov4-416-fp32.tflite";
+    //private static final String TF_OD_API_MODEL_FILE = "yolov4-416_first_version.tflite";
 
-    private static final String TF_OD_API_LABELS_FILE = "file:///android_asset/label.txt";
+    private static final String TF_OD_API_LABELS_FILE = "file:///android_asset/coco.txt";
+    //private static final String TF_OD_API_LABELS_FILE = "file:///android_asset/class.txt";
 
     // Minimum detection confidence to track a detection.
     private static final boolean MAINTAIN_ASPECT = false;

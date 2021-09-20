@@ -238,7 +238,8 @@ public class CameraConnectionFragment extends Fragment {
 
     // Pick the smallest of those, assuming we found any
     if (bigEnough.size() > 0) {
-      final Size chosenSize = Collections.min(bigEnough, new CompareSizesByArea());
+      //final Size chosenSize = Collections.max(bigEnough, new CompareSizesByArea());
+      final Size chosenSize = bigEnough.get(2);
       LOGGER.i("Chosen size: " + chosenSize.getWidth() + "x" + chosenSize.getHeight());
       return chosenSize;
     } else {

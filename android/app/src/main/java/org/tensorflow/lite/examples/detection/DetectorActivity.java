@@ -16,6 +16,7 @@
 
 package org.tensorflow.lite.examples.detection;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
@@ -26,7 +27,10 @@ import android.graphics.Paint.Style;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.media.ImageReader.OnImageAvailableListener;
+import android.media.MediaPlayer;
+import android.os.Handler;
 import android.os.SystemClock;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Size;
 import android.util.TypedValue;
@@ -51,17 +55,22 @@ import org.tensorflow.lite.examples.detection.tracking.MultiBoxTracker;
  */
 public class DetectorActivity extends CameraActivity implements OnImageAvailableListener {
     private static final Logger LOGGER = new Logger();
+    private static final DisplayMetrics displaymetrics = new DisplayMetrics();
+    private static final int phoneHeight = displaymetrics.heightPixels;
+    private static final int phoneWidth = displaymetrics.widthPixels;
 
     private static final int TF_OD_API_INPUT_SIZE = 416;
     private static final boolean TF_OD_API_IS_QUANTIZED = false;
-    private static final String TF_OD_API_MODEL_FILE = "yolov4-416-v1.tflite";
+    private static final String TF_OD_API_MODEL_FILE = "yolov4-416-fp32.tflite";
+    //private static final String TF_OD_API_MODEL_FILE = "yolov4-416_first_version.tflite";
 
-    private static final String TF_OD_API_LABELS_FILE = "file:///android_asset/label.txt";
+    private static final String TF_OD_API_LABELS_FILE = "file:///android_asset/coco.txt";
+    //private static final String TF_OD_API_LABELS_FILE = "file:///android_asset/class.txt";
 
     private static final DetectorMode MODE = DetectorMode.TF_OD_API;
     private static final float MINIMUM_CONFIDENCE_TF_OD_API = 0.5f;
     private static final boolean MAINTAIN_ASPECT = false;
-    private static final Size DESIRED_PREVIEW_SIZE = new Size(640, 480);
+    private static final Size DESIRED_PREVIEW_SIZE = new Size(phoneWidth,phoneHeight);
     private static final boolean SAVE_PREVIEW_BITMAP = false;
     private static final float TEXT_SIZE_DIP = 10;
     OverlayView trackingOverlay;
@@ -218,12 +227,21 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                 result.setLocation(location);
                                 mappedRecognitions.add(result);
 
+
                                 String title = result.getTitle();   // 인식한 객체의 라벨을 가져옴
 
                                 Intent intent = new Intent(DetectorActivity.this, VoiceActivity.class);
                                 intent.putExtra("title",title); //인식한 객체의 라벨을 VoiceActivity 로 전달
-                                startActivity(intent);
 
+                                Handler handler = new Handler();
+                                handler.postDelayed(new Runnable(){
+                                    @Override
+                                    public void run(){
+                                        Log.e("Splash Activity","Application is Running");
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                },1500);
 
                             }
                         }

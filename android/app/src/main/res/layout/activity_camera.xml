@@ -51,6 +51,8 @@
     </RelativeLayout>
 
     <include
+        android:visibility="gone"
         android:id="@+id/bottom_sheet_layout"
-        layout="@layout/tfe_od_layout_bottom_sheet" />
+        layout="@layout/tfe_od_layout_bottom_sheet"
+        />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
