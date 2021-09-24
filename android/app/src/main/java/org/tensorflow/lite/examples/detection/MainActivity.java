@@ -42,7 +42,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        mediaPlayer=MediaPlayer.create(this,R.raw.audio_0);
+        //mediaPlayer=MediaPlayer.create(this,R.raw.audio_0);
+        mediaPlayer=MediaPlayer.create(this,R.raw.audio_0_start);
         mediaPlayer.start();
 
         startSplash();

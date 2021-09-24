@@ -26,29 +26,34 @@ public class VoiceActivity extends AppCompatActivity {
 
 
         if (title.equals("plastic bottle")) {
-            mediaPlayer = MediaPlayer.create(this, R.raw.audio_1);
+            mediaPlayer = MediaPlayer.create(this, R.raw.audio_1_pb);
             mediaPlayer.start();
+
         } else if (title.equals("plastic")) {
-            mediaPlayer = MediaPlayer.create(this, R.raw.audio_1);
+            mediaPlayer = MediaPlayer.create(this, R.raw.audio_5_plastic);
             mediaPlayer.start();
 
         } else if (title.equals("can")) {
-            mediaPlayer = MediaPlayer.create(this, R.raw.audio_1);
+            mediaPlayer = MediaPlayer.create(this, R.raw.audio_4_can);
             mediaPlayer.start();
 
         } else if (title.equals("glass bottle")) {
-            mediaPlayer = MediaPlayer.create(this, R.raw.audio_1);
+            mediaPlayer = MediaPlayer.create(this, R.raw.audio_2_glass);
             mediaPlayer.start();
 
         } else if (title.equals("plastic bag")) {
-            mediaPlayer = MediaPlayer.create(this, R.raw.audio_1);
+            mediaPlayer = MediaPlayer.create(this, R.raw.audio_6_pb);
             mediaPlayer.start();
 
         } else if (title.equals("paper bag")) {
-            mediaPlayer = MediaPlayer.create(this, R.raw.audio_1);
+            mediaPlayer = MediaPlayer.create(this, R.raw.audio_3_paper);
             mediaPlayer.start();
-
         }
+
+        //해당 객체에 대한 음성 안내가 끝나면 restart 안내 보이스 출력
+        mediaPlayer=MediaPlayer.create(this,R.raw.audio_7_restart);
+        mediaPlayer.start();
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -57,6 +62,6 @@ public class VoiceActivity extends AppCompatActivity {
                 startActivity(newintent);
                 finish();
             }
-        }, 15000);
+        }, 20000);
     }
 }
