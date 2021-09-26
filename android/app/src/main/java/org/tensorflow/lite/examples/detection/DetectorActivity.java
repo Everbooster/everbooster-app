@@ -61,14 +61,12 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
     private static final int TF_OD_API_INPUT_SIZE = 416;
     private static final boolean TF_OD_API_IS_QUANTIZED = false;
-    private static final String TF_OD_API_MODEL_FILE = "yolov4-416-fp32.tflite";
-    //private static final String TF_OD_API_MODEL_FILE = "yolov4-416_first_version.tflite";
+    private static final String TF_OD_API_MODEL_FILE = "everbooster_model.tflite";
+    private static final String TF_OD_API_LABELS_FILE = "file:///android_asset/everbooster_label.txt";
 
-    private static final String TF_OD_API_LABELS_FILE = "file:///android_asset/coco.txt";
-    //private static final String TF_OD_API_LABELS_FILE = "file:///android_asset/class.txt";
 
     private static final DetectorMode MODE = DetectorMode.TF_OD_API;
-    private static final float MINIMUM_CONFIDENCE_TF_OD_API = 0.5f;
+    private static final float MINIMUM_CONFIDENCE_TF_OD_API = 0.7f;
     private static final boolean MAINTAIN_ASPECT = false;
     private static final Size DESIRED_PREVIEW_SIZE = new Size(phoneWidth,phoneHeight);
     private static final boolean SAVE_PREVIEW_BITMAP = false;
@@ -238,6 +236,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                     @Override
                                     public void run(){
                                         Log.e("Splash Activity","Application is Running");
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                         startActivity(intent);
                                         finish();
                                     }

@@ -39,17 +39,17 @@ public class VoiceActivity extends AppCompatActivity {
 
         } else if (title.equals("can")) {
             voiceGuidance(R.raw.audio_4_can);
-            TimerSetting(17500,handler,newintent);
+            TimerSetting(18300,handler,newintent);
 
         } else if (title.equals("glass bottle")) {
             voiceGuidance(R.raw.audio_2_glass);
-            TimerSetting(19500,handler,newintent);
+            TimerSetting(20300,handler,newintent);
 
         } else if (title.equals("plastic bag")) {
             voiceGuidance(R.raw.audio_6_pb);
             TimerSetting(13500,handler,newintent);
 
-        } else if (title.equals("paper bag")) {
+        } else if (title.equals("paper pack")) {
             voiceGuidance(R.raw.audio_3_paper);
             TimerSetting(15500,handler,newintent);
         }
@@ -86,6 +86,7 @@ public class VoiceActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Log.e("Splash Activity", "Application is Running");
+                nextintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(nextintent);
                 finish();
             }
