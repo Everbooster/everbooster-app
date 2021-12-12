@@ -92,6 +92,13 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
     private BorderedText borderedText;
 
+    private int plasticbag = 0;
+    private int plastic = 0;
+    private int plasticbottle= 0;
+    private int can= 0;
+    private int glassbottle= 0;
+    private int paperpack= 0;
+
     @Override
     public void onPreviewSizeChosen(final Size size, final int rotation) {
         final float textSizePx =
@@ -161,7 +168,58 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
         tracker.setFrameConfiguration(previewWidth, previewHeight, sensorOrientation);
     }
+    void setTagCount(int title){
 
+        if(title == 0){
+            plasticbottle+=1;
+            System.out.println("plastic bottle detected");
+        }
+        else if(title ==1){
+            plastic+=1;
+            System.out.println("plastic detected");
+        }
+        else if(title == 5){
+            plasticbag+=1;
+            System.out.println("paper pack detected");
+        }
+        else if(title == 4){
+            paperpack+=1;
+            System.out.println("plastic bag detected");
+        }
+        else if(title ==2){
+            can+=1;
+            System.out.println("can detected");
+        }
+        else if(title == 3){
+            glassbottle+=1;
+            System.out.println("glass bottle detected");
+        }
+    }
+    void initTagCount(){
+        plasticbottle=0;
+        plastic=0;
+        plasticbag=0;
+        paperpack=0;
+        can=0;
+        glassbottle=0;
+    }
+    void printCount(){
+        System.out.println(plasticbottle);
+        System.out.println(plastic);
+        System.out.println(plasticbag);
+        System.out.println(can);
+        System.out.println(paperpack);
+        System.out.println(glassbottle);
+    }
+    String getTagCount(){
+        if(plasticbottle>1){initTagCount();return "plastic bottle";}
+        if(plastic>1){initTagCount();return "plastic";}
+        if(plasticbag>1){initTagCount();return "plastic bag";}
+        if(paperpack>1){initTagCount();return "paper pack";}
+        if(can>1){initTagCount();return "can bottle";}
+        if(glassbottle>1){initTagCount();return "glass bottle";}
+        return "";
+    }
     @Override
     protected void processImage() {
         ++timestamp;
@@ -225,24 +283,30 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                 result.setLocation(location);
                                 mappedRecognitions.add(result);
 
-
+                                int DetectedClass = result.getDetectedClass();
                                 String title = result.getTitle();   // 인식한 객체의 라벨을 가져옴
+                                System.out.println(DetectedClass);
+                                setTagCount(DetectedClass);printCount();
+                                String guideTitle = getTagCount();
+                                if(guideTitle!=""){
 
-                                Intent intent = new Intent(DetectorActivity.this, VoiceActivity.class);
-                                intent.putExtra("title",title); //인식한 객체의 라벨을 VoiceActivity 로 전달
+                                    Intent intent = new Intent(DetectorActivity.this, VoiceActivity.class);
+                                    intent.putExtra("title",guideTitle); //인식한 객체의 라벨을 VoiceActivity 로 전달
 
-                                Handler handler = new Handler();
-                                handler.postDelayed(new Runnable(){
-                                    @Override
-                                    public void run(){
-                                        Log.e("Splash Activity","Application is Running");
-                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                        startActivity(intent);
-                                        finish();
-                                    }
-                                },1500);
+                                    Handler handler = new Handler();
+                                    handler.postDelayed(new Runnable(){
+                                        @Override
+                                        public void run(){
+                                            Log.e("Splash Activity","Application is Running");
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                            startActivity(intent);
+                                            finish();
+                                        }
+                                    },1500);
+                                }
 
-                            }
+
+}
                         }
 
                         tracker.trackResults(mappedRecognitions, currTimestamp);

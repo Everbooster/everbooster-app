@@ -173,7 +173,7 @@ public class YoloV4Classifier implements Classifier {
     private static final int NUM_BOXES_PER_BLOCK = 3;
 
     // Number of threads in the java app
-    private static final int NUM_THREADS = 4;
+    private static final int NUM_THREADS = 10;
     private static boolean isNNAPI = false;
     private static boolean isGPU = true;
 
