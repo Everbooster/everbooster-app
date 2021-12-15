@@ -179,11 +179,11 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
             System.out.println("plastic detected");
         }
         else if(title == 5){
-            plasticbag+=1;
+            paperpack+=1;
             System.out.println("paper pack detected");
         }
         else if(title == 4){
-            paperpack+=1;
+            plasticbag+=1;
             System.out.println("plastic bag detected");
         }
         else if(title ==2){
@@ -216,7 +216,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
         if(plastic>1){initTagCount();return "plastic";}
         if(plasticbag>1){initTagCount();return "plastic bag";}
         if(paperpack>1){initTagCount();return "paper pack";}
-        if(can>1){initTagCount();return "can bottle";}
+        if(can>1){initTagCount();return "can";} // voice Activity 에서 can으로 받음
         if(glassbottle>1){initTagCount();return "glass bottle";}
         return "";
     }
